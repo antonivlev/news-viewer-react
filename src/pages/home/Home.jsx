@@ -4,12 +4,15 @@ import Parser from 'rss-parser';
 
 import Story from '../../components/Story';
 
-export default () => {
+/**
+ * Fetches the news stories and lays out Story components
+ */
+const Home = () => {
   const [stories, setStories] = useState([]);
 
   useEffect(() => {
     const parser = new Parser();
-    parser.parseURL('/news/rss.xml?edition=uk')
+    parser.parseURL('https://cors-anywhere.herokuapp.com/http://feeds.bbci.co.uk/news/rss.xml?edition=uk')
       .then((feed) => {
         console.log(feed);
         setStories(feed.items);
@@ -23,3 +26,5 @@ export default () => {
     </div>
   );
 };
+
+export default Home;

@@ -1,6 +1,6 @@
 #root {
     display: grid;
-    grid-template-columns: 25% 50% 25%;
+    grid-template-columns: 1fr minmax(300px, 50%) 1fr;
 }
 
 .stories-column {

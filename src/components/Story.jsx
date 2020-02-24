@@ -10,7 +10,10 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 import firebase from '../database/firebase';
 
-
+/**
+ * Story accepts a story prop and lays it out on a card
+ * @param {object} story - must have pubDate, title and content fields
+ */
 const Story = ({ story }) => {
   const [liked, setLiked] = React.useState(false);
 
