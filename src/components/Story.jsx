@@ -21,8 +21,8 @@ const Story = ({ story }) => {
     const dbStory = db.collection('liked-stories').doc(storyID);
 
     dbStory.get().then((doc) => {
-      const dbLiked = doc.data();
-      if (dbLiked) setLiked(dbLiked);
+      const dbStoryData = doc.data();
+      if (dbStoryData) setLiked(dbStoryData.isLiked);
     });
   }, [story.link]);
 
@@ -47,7 +47,7 @@ const Story = ({ story }) => {
         <Typography gutterBottom variant="h5" component="h2">
           {story.title}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography color="textSecondary">
           {story.content}
         </Typography>
       </CardContent>
