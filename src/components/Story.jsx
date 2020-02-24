@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Story.css';
 
+// material components
 import {
   Card, Button, Typography, CardContent, CardActions, IconButton,
 } from '@material-ui/core';
-
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
+import firebase from '../database/firebase';
+
+
 const Story = ({ story }) => {
   const [liked, setLiked] = React.useState(false);
+
+  useEffect(() => {
+    const storyID = story.link.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
+
+    const db = firebase.firestore();
+    const dbStory = db.collection('liked-stories').doc(storyID);
+
+    dbStory.get().then((doc) => {
+      const dbLiked = doc.data();
+      if (dbLiked) setLiked(dbLiked);
+    });
+  }, [story.link]);
+
+  const setLikedAndWrite = () => {
+    const storyID = story.link.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
+
+    const db = firebase.firestore();
+    const dbStory = db.collection('liked-stories').doc(storyID);
+    dbStory.set({
+      isLiked: !liked,
+    });
+
+    setLiked(!liked);
+  };
+
   return (
     <Card className="story-card">
       <CardContent>
@@ -36,7 +64,7 @@ const Story = ({ story }) => {
         >
           Read more
         </Button>
-        <IconButton onClick={() => setLiked(!liked)}>
+        <IconButton onClick={setLikedAndWrite}>
           {liked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
         </IconButton>
       </CardActions>

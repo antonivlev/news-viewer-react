@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-// import firebase from './firebase';
 import Parser from 'rss-parser';
 
 import Story from '../../components/Story';
