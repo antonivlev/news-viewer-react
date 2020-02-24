@@ -22,7 +22,7 @@ module.exports = {
     'react',
   ],
   rules: {
-    // ignore prop type validation for now; in real development app should be in TypeScript
+    // ignore prop type validation for now; in real development, app should be in TypeScript
     "react/prop-types": 0
   },
 };
