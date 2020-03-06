@@ -75,4 +75,10 @@ const Story = ({ story }) => {
   );
 };
 
+Story.defaultProps = {
+  story: {
+    link: 'somewhere',
+  },
+};
+
 export default Story;
